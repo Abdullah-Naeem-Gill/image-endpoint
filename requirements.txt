@@ -1,0 +1,13 @@
+Create an endpoint for uploading the image
+save the image in the local storage like Data/Date/filename
+the file name should be something like this 1/22/2025 etc
+TABLE FIELDS
+uuid
+name
+size
+extention
+path
+created at
+updated at
+
+from .env file validate that the image uploaded should only be a png or jpg otherwise it will through the error
