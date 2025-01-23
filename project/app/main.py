@@ -1,8 +1,8 @@
-import asyncio  # Import asyncio for lifespan
-from fastapi import FastAPI, Depends, HTTPException
+
+from fastapi import FastAPI, HTTPException
 from app.image_upload.Route import router as upload_router
 from app.utils.logging_config import configure_logger
-from app.Core.DB.db import initialize_db, get_db  # Import from db.py
+from app.Core.DB.db import initialize_db # Import from db.py
 
 logger = configure_logger()
 

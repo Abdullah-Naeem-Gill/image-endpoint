@@ -10,7 +10,7 @@ logger = configure_logger()
 router = APIRouter()
 
 @router.post("/upload_image/")
-async def upload_image(file: UploadFile = File(...), db: AsyncSession = Depends(get_db)):
+async def upload_image(file: UploadFile = File(...), db: AsyncSession = Depends(get_db)) -> type:
     try:
         response = await handle_image_upload(file, db)
 
