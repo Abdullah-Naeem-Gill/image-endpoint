@@ -18,8 +18,8 @@ This project is a simple FastAPI application that allows users to upload images 
 
 ## Installation
 
-### 1. Clone the repository
 
+1.Clone the repo
 ```bash
 git clone https://github.com/Abdullah-Naeem-Gill/image-endpoint.git
 cd your-repo-name
@@ -38,7 +38,7 @@ venv\Scripts\activate
 source venv/bin/activate
 
 
-###3. Install dependencies
+3. Install dependencies
 
 pip install -r requirements.txt
 
