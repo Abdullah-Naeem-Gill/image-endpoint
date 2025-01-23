@@ -2,7 +2,7 @@ from fastapi import APIRouter, File, UploadFile, Depends
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
-from app.image_upload.Services import handle_image_upload  
+from app.image_upload.services import handle_image_upload  
 from app.utils.logging_config import configure_logger 
 
 logger = configure_logger() 
@@ -10,7 +10,7 @@ logger = configure_logger()
 router = APIRouter()
 
 @router.post("/upload_image/")
-async def upload_image(file: UploadFile = File(...), db: AsyncSession = Depends(get_db)) -> type:
+async def upload_image(file: UploadFile = File(...), db: AsyncSession = Depends(get_db)) :
     try:
         response = await handle_image_upload(file, db)
 
