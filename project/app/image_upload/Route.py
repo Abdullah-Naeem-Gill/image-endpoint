@@ -1,7 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, Depends
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.database import get_db
+from app.Core.DB.database import get_db
 from app.image_upload.services import handle_image_upload  
 from app.utils.logging_config import configure_logger 
 

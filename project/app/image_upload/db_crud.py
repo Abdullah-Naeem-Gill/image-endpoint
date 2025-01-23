@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from app import models
+from app.image_upload import models
 from datetime import datetime
 import os
 from fastapi import UploadFile  # <-- Add this import

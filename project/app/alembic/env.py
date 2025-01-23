@@ -2,7 +2,7 @@ from logging.config import fileConfig
 
 from alembic import context
 from sqlmodel import SQLModel
-from database import engine  # Import your SQLModel engine
+from project.app.Core.DB.database import engine  # Import your SQLModel engine
 from project.app.image_upload.models import User, Role, Task, TaskAssignment  # Import your models here
 
 # this is the Alembic Config object, which provides
