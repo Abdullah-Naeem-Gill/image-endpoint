@@ -1,29 +1,20 @@
-import logging
+import asyncio  # Import asyncio for lifespan
 from fastapi import FastAPI, Depends, HTTPException
-from app.routers.upload import router as upload_router
-from app.database import engine, init_db, SessionLocal
-from app import models
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.exc import SQLAlchemyError
+from app.image_upload.Route import router as upload_router
+from app.utils.logging_config import configure_logger
+from app.Core.DB.db import initialize_db, get_db  # Import from db.py
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = configure_logger()
 
-app = FastAPI()
-
-@app.on_event("startup")
-async def on_startup():
+async def lifespan(app: FastAPI):
     try:
-        await init_db()
-        logger.info("Database initialized successfully.")
+        db_message = await initialize_db()  
+        logger.info(db_message)
+        yield
     except SQLAlchemyError as e:
         logger.error(f"Error initializing the database: {e}")
         raise HTTPException(status_code=500, detail="Error initializing the database")
 
-async def get_db() -> AsyncSession:
-    
-    async with SessionLocal() as db:
-        yield db
+app = FastAPI(lifespan=lifespan)
 
 app.include_router(upload_router)
-

@@ -1,5 +1,6 @@
 
 import os
+import logging
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
@@ -22,17 +23,8 @@ SessionLocal = sessionmaker(
     expire_on_commit=False
 )
 
-async def get_db() -> AsyncSession:
- 
-    try:
-        async with SessionLocal() as session:
-            yield session
-    except SQLAlchemyError as e:
-        logger.error(f"Database connection error: {e}")
-        raise HTTPException(status_code=500, detail="Database connection error")
-
-async def init_db() -> None:
-   
+async def initialize_db() -> None:
+    """ Initialize the database by creating the necessary tables """
     try:
         async with engine.begin() as conn:
             await conn.run_sync(SQLModel.metadata.create_all)
@@ -41,3 +33,12 @@ async def init_db() -> None:
         raise HTTPException(status_code=500, detail="Error initializing the database")
     else:
         logger.info("Database initialized successfully.")
+
+async def get_db() -> AsyncSession:
+    """ Dependency to get a database session """
+    try:
+        async with SessionLocal() as session:
+            yield session
+    except SQLAlchemyError as e:
+        logger.error(f"Database connection error: {e}")
+        raise HTTPException(status_code=500, detail="Database connection error")
