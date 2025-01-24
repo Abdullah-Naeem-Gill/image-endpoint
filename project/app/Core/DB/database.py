@@ -41,7 +41,7 @@ async def initialize_db() -> None:
     """
     try:
         async with engine.begin() as conn:
-            await conn.run_sync(SQLModel.metadata.create_all)
+            await conn.run_sync(SQLModel.metadata.create_all)  
     except SQLAlchemyError as e:
         logger.error(f"Error initializing the database: {e}")
         raise HTTPException(status_code=500, detail="Error initializing the database")

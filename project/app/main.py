@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from app.image_upload.route import router as upload_router
 from app.utils.logging_config import configure_logger
-from app.Core.DB.database import initialize_db # Import from db.py
+from app.Core.DB.database import initialize_db
 
 logger = configure_logger()
 
